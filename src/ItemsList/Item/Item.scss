@@ -1,0 +1,84 @@
+@import '../../media_vars.scss';
+
+.item-container{
+  padding: 10px;
+  background-color: white;
+
+  &:not(:last-child){
+    border-bottom: solid 1px #cccccc;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+
+  @media(max-width: $width_480){
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+.item-info{
+  display: flex;
+}
+
+.item-general-info{
+  flex: 9;
+  margin-left: 10px;
+}
+
+.item-title{
+  text-decoration: none;
+  color: initial;
+}
+
+@media(max-width: $width_480){
+  .item-title p{
+    font-size: 14px;
+  }
+}
+
+.item-location{
+  flex: 1;
+}
+
+.itemPrice{
+  display: inline-block;
+  font-size: 22px;
+}
+
+@media(max-width: $width_480){
+  .itemPrice{
+    margin: 10px 0;
+  }
+}
+
+.itemPrice-decimals{
+  font-size: 12px;
+  position: relative;
+  bottom: 7px;
+}
+
+.itemPrice-free-shipping{
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  left: 5px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background: no-repeat url("../../assets/truck.png") limegreen 50% 50%;
+}
+
+.item-location{
+  p{
+    text-align: center;
+    color: darkblue;
+    font-size: 14px;
+    position: relative;
+  }
+}
+

@@ -1,23 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.scss';
+import {Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+
+
+//Import ==> Components
+ import {SearchBox} from "./SearchBox/SearchBox";
+ import Loader from './Loader/Loader';
+ import ItemsList from "./ItemsList/ItemsList";
+ import ItemDetail from "./ItemDetail/ItemDetail";
+
+
 
 function App() {
+  let navigate = useNavigate();
+
+  //save results
+  const [results, setResults] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  //Get results - SearchBox + control loading logo
+  const getResults = (query) => {
+    setLoading(true);
+    fetch(`http://localhost:8080/api/items?q=${query}`)
+        .then(response => response.json())
+        .then(response => {
+            if (response.error) {
+                console.error(response);
+                setLoading(false);
+                setResults({error: response});
+            } else {
+                setLoading(false);
+                setResults(response);
+                //Change path on browser from => /api/items?q= to /items?search=
+                navigate(`/items?search=${query}`);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            setLoading(false);
+            setResults({error: 'Error Api Connection'});
+        });
+  };
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        
+        {
+          loading ? <Loader /> : 
+
+          <Routes>
+            <Route path="/" element={<SearchBox onSubmit={(query) => getResults(query)}/>} />
+            <Route exact path="/items" element={ results.products ? <React.Fragment><SearchBox onSubmit={(query) => getResults(query)}/> <ItemsList categories={results.categories} products={results.products}/> </React.Fragment> : <Navigate to={`/`}></Navigate>}/>
+            <Route path="/items/:id" element={<React.Fragment><SearchBox onSubmit={(query) => getResults(query)}/><ItemDetail/></React.Fragment>} />
+          </Routes>
+
+        }
+
+
     </div>
   );
 }

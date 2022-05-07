@@ -1,0 +1,20 @@
+.breadcrumb-container{
+  padding-inline-start: 0;
+}
+
+.breadcrumb{
+  color: rgba(0, 0, 139, 0.694);
+  font-size: 12px;
+  display: inline-block;
+  margin-right: 7px;
+
+  i {
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    margin-left: 7px;
+    border: solid rgba(0, 0, 139, 0.705);
+    border-width: 0 3px 3px 0;
+  }
+}

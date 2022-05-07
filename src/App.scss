@@ -1,0 +1,14 @@
+@import 'media_vars.scss';
+html{
+  background-color: #eeeeee;
+}
+.App{
+  min-height: 100vh;
+  padding-bottom: 30px;
+}
+
+@media(max-width: $width_1024){
+  .App{
+    padding: 0px 10px 30px 10px;
+  }
+}
