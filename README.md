@@ -1,3 +1,25 @@
+# Challenge *** Mercado Libre *** ===> Hernán Nicolás Logioco #
+
+## Challenge - Meli ##
+
+This challenge was done with React (frontend) and Node.js + express (backend)
+The base of the project was created using the `Create React App` command.
+The following dependencies were installed:
+> "cors": "^2.8.5"
+> "express": "^4.17.3"
+> "concurrently": "^7.1.0"
+> "history": "^5.3.0"
+> "node-sass": "^7.0.1"
+> "nodemon": "^2.0.15"
+
+## How to run the project? ##
+
+> `npm install`
+
+> `npm run all` => This command executes the following commands, simultaneously (`npm start` + `npm run backend`).
+
+<<<------------------------------------------------------------------------------------------------------------->>>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
