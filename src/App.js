@@ -65,10 +65,11 @@ function App() {
               <Message error={false} message={"No hay publicaciones que coincidan con tu búsqueda. Por favor revisá la ortografía o Intentá ingresar una nueva palabra."}/>
             </React.Fragment>
             :
-            <Navigate to={`/`}></Navigate>} 
+            <Navigate to={"/"}></Navigate>} 
           />
           
           <Route path="/items/:id" element={ <React.Fragment><SearchBox onSubmit={(query) => getResults(query)}/><ItemDetail/></React.Fragment>} />
+          <Route path="*" element={ <Navigate replace to="/"/>} />
         </Routes>
 
       }
