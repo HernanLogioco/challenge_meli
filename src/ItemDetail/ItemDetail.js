@@ -23,7 +23,7 @@ export default function ItemDetail() {
                     switch(response.status){
                         case 404: text = 'El producto ingresado no existe'; break;
                         case 500: text = 'No se encontro el producto'; break;
-                        default: text = 'Ups! Algo salió mal :( . Intenta nuevamente mas tarde'; break;
+                        default: text = 'Ups! :( Algo salió mal. Intenta nuevamente mas tarde'; break;
                     }
                     setErrorMsg({error: true, text: text});
                 } else {
