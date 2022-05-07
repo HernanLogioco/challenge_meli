@@ -8,7 +8,7 @@ import {Routes, Route, useNavigate, Navigate } from 'react-router-dom';
  import Loader from './Loader/Loader';
  import ItemsList from "./ItemsList/ItemsList";
  import ItemDetail from "./ItemDetail/ItemDetail";
-
+ import Message from "./Message/Message";
 
 
 function App() {
@@ -42,25 +42,39 @@ function App() {
         });
   };
 
-
-
   return (
     <div className="App">
-        
-        {
-          loading ? <Loader /> : 
+      {
+        loading ? <Loader /> : 
 
-          <Routes>
-            <Route path="/" element={<SearchBox onSubmit={(query) => getResults(query)}/>} />
-            <Route exact path="/items" element={ results.products ? <React.Fragment><SearchBox onSubmit={(query) => getResults(query)}/> <ItemsList categories={results.categories} products={results.products}/> </React.Fragment> : <Navigate to={`/`}></Navigate>}/>
-            <Route path="/items/:id" element={<React.Fragment><SearchBox onSubmit={(query) => getResults(query)}/><ItemDetail/></React.Fragment>} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<SearchBox onSubmit={(query) => getResults(query)}/>} />
 
-        }
+          <Route exact path="/items" element={ results.error ?  
 
+            <Message error={true} message={'Ups! Surgió un inconveniente buscando ese producto. Intenta nuevamente, más tarde.'}/> :
 
+            results.products ? results.products.length ? 
+            <React.Fragment>
+              <SearchBox onSubmit={(query) => getResults(query)}/> 
+              <ItemsList categories={results.categories} products={results.products}/> 
+            </React.Fragment> 
+            :
+            <React.Fragment>
+              <SearchBox onSubmit={(query) => getResults(query)}/>
+              <Message error={false} message={"No hay publicaciones que coincidan con tu búsqueda. Por favor revisá la ortografía o Intentá ingresar una nueva palabra."}/>
+            </React.Fragment>
+            :
+            <Navigate to={`/`}></Navigate>} 
+          />
+          
+          <Route path="/items/:id" element={ <React.Fragment><SearchBox onSubmit={(query) => getResults(query)}/><ItemDetail/></React.Fragment>} />
+        </Routes>
+
+      }
     </div>
   );
+
 }
 
 export default App;

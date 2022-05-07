@@ -2,17 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const client = require('./client');
 
-
-//LEVANTA EL BACKEND EN PUERTO 8080 + DEFINICION DE ENDPOINTS (RUTAS POSIBLES) 
-// => localhost:8080/api/items y localhost:8080/items/:id
 const app = express();
 app.use(cors());
-
-//TEST SERVER
-// app.get('/TESTING', (req, res) => {
-//     res.send('Testing GET')
-// });
-
 
 //GET LIST OF PRODUCTS
 getProductList = (query) => {
@@ -57,6 +48,15 @@ getProductList = (query) => {
 getProductDetail = (query) => {
     return client.getDataProducts(query)
         .then(responses => {
+            responses.forEach(resp => {       
+                if(resp.error){
+                    throw resp;
+                }
+            });
+            return responses;
+        })
+
+        .then(responses => {
         
             const [item, description] = responses;
             const [amount, decimals] = item.price.toString().split('.');
@@ -84,7 +84,7 @@ getProductDetail = (query) => {
 };
 
 
-// ####################################### BACKEND-EndPoints - GETS - PORT #######################################
+// ####################################### BACKEND->EndPoints - GETS - PORT #######################################
 app.get('/api/items', (req, res) => {
     getProductList(req.query.q)
         .then(products => res.json(products))
@@ -97,6 +97,12 @@ app.get('/api/items/:id', (req, res) => {
             .then(item => res.json(item))
             .catch(error =>  res.status(500).send(error));
 });
+
+
+//TEST SERVER
+// app.get('/TESTING', (req, res) => {
+//     res.send('Testing GET')
+// });
 
 app.listen(8080, () => {
     console.log('Server started in port 8080');
