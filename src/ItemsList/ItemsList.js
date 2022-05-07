@@ -1,4 +1,6 @@
 import React from 'react';
+
+//Import ==> Components
 import './ItemsList.scss';
 import Item from "./Item/Item";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";

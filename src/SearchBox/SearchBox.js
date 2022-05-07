@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+
+//Import ==> Components
 import './SearchBox.scss';
 import logo from '../assets/meli-logo.png';
 

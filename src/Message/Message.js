@@ -1,4 +1,6 @@
 import React from 'react';
+
+//Import ==> Components
 import './Message.scss';
 
 export default function Message(props){
